@@ -6,7 +6,6 @@ public class Services
     
     public Services(Repositories.Repositories repositories)
     {
-        Console.WriteLine("Services initialized");
         TestService = new TestService(repositories);
     }
 }

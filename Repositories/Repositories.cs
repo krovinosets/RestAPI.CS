@@ -8,7 +8,6 @@ public class Repositories
     
     public Repositories(Database database)
     {
-        Console.WriteLine("Repositories initialized");
         TestRepository = new TestRepository(database);
     }
 }

@@ -5,11 +5,11 @@ namespace SHACT.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class Test : ControllerBase
+public class Chakatons : ControllerBase
 {
     private readonly Services.Services _services;
     
-    public Test(Services.Services services)
+    public Chakatons(Services.Services services)
     {
         _services = services;
     }
@@ -21,9 +21,9 @@ public class Test : ControllerBase
     }
     
     [HttpGet]
-    public List<Chakaton> Get()
+    public String Get()
     {
-        return _services.TestService.TestFull();
+        return "Get Fine!";
     }
     
     [HttpPatch]
