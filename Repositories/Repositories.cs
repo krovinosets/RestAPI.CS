@@ -4,10 +4,12 @@ namespace Repositories;
 
 public class Repositories
 {
-    public readonly TestRepository TestRepository;
+    public readonly UsersRepository UserRepository;
+    public readonly ChakatonRepository ChakatonRepository;
     
     public Repositories(Database database)
     {
-        TestRepository = new TestRepository(database);
+        UserRepository = new UsersRepository(database);
+        ChakatonRepository = new ChakatonRepository(database);
     }
 }

@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositorie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseContext", "DatabaseContext\DatabaseContext.csproj", "{7557F029-A925-46D6-8D7C-5346F5D6D8B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseModels", "DatabaseModels\DatabaseModels.csproj", "{1A4676F1-26EF-4723-B1EF-B41820D0B522}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataFlow", "DataFlow\DataFlow.csproj", "{3867B402-1751-4990-B231-A99FD41D93A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,9 +32,9 @@ Global
 		{7557F029-A925-46D6-8D7C-5346F5D6D8B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7557F029-A925-46D6-8D7C-5346F5D6D8B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7557F029-A925-46D6-8D7C-5346F5D6D8B4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1A4676F1-26EF-4723-B1EF-B41820D0B522}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A4676F1-26EF-4723-B1EF-B41820D0B522}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1A4676F1-26EF-4723-B1EF-B41820D0B522}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1A4676F1-26EF-4723-B1EF-B41820D0B522}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3867B402-1751-4990-B231-A99FD41D93A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3867B402-1751-4990-B231-A99FD41D93A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3867B402-1751-4990-B231-A99FD41D93A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3867B402-1751-4990-B231-A99FD41D93A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
