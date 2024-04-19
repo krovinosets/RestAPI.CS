@@ -1,6 +1,8 @@
-﻿namespace DatabaseModels;
+﻿using DataFlow.Entities;
 
-public class Request
+namespace DataFlow.Models;
+
+public class Request : IModel
 {
     public int Id { get; set; }
 
@@ -25,4 +27,9 @@ public class Request
     }
     
     public Request(){}
+    
+    public IEntity ToEntity()
+    {
+        throw new NotImplementedException();
+    }
 }

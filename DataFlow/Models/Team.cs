@@ -1,6 +1,8 @@
-﻿namespace DatabaseModels;
+﻿using DataFlow.Entities;
 
-public class Team
+namespace DataFlow.Models;
+
+public class Team : IModel
 {
     public int Id { get; set; }
     public string Name { get; set; }
@@ -33,4 +35,9 @@ public class Team
     }
     
     public Team(){}
+    
+    public IEntity ToEntity()
+    {
+        throw new NotImplementedException();
+    }
 }

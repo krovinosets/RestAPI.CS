@@ -1,5 +1,11 @@
 namespace SHACT;
 
+/* 
+ * Controller - JSON
+ * Service - DTO
+ * Repository - Model
+ */
+
 static class Program
 {
     static void Main(string[] args)

@@ -1,5 +1,7 @@
-﻿using DatabaseModels;
+﻿using DataFlow.Dto;
+using DataFlow.Entities;
 using Microsoft.AspNetCore.Mvc;
+using SHACT.Response;
 
 namespace SHACT.Controllers;
 
@@ -21,9 +23,40 @@ public class Users : ControllerBase
     }
     
     [HttpGet]
-    public String Get()
+    public IActionResult Get([FromQuery] int uid)
     {
-        return "Get Fine!";
+        try
+        {
+            UserDto userDto = new UserDto();
+            userDto.Id = uid;
+
+            UserEntity ue = (UserEntity)userDto.ToEntity();
+            UserDto result = _services.UsersService.Read(ue);
+
+            return Ok(ResponseManager.SendJson(result));
+        }
+        catch (Exception e)
+        {
+            return BadRequest(ResponseManager.SendError(e.Message));
+        }
+    }
+    
+    [HttpGet]
+    [Route("All")]
+    public IActionResult GetAll()
+    {
+        try
+        {
+            UserDto userDto = new UserDto();
+            UserEntity ue = (UserEntity)userDto.ToEntity();
+            List<UserDto> result = _services.UsersService.ReadAll(ue);
+
+            return Ok(ResponseManager.SendJson(result));
+        }
+        catch (Exception e)
+        {
+            return BadRequest(ResponseManager.SendError(e.Message));
+        }
     }
     
     [HttpPatch]

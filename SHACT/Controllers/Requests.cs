@@ -1,5 +1,4 @@
-﻿using DatabaseModels;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace SHACT.Controllers;
 

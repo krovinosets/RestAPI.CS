@@ -1,5 +1,7 @@
-﻿using DatabaseModels;
+﻿using DataFlow.Dto;
+using DataFlow.Entities;
 using Microsoft.AspNetCore.Mvc;
+using SHACT.Response;
 
 namespace SHACT.Controllers;
 
@@ -21,9 +23,40 @@ public class Chakatons : ControllerBase
     }
     
     [HttpGet]
-    public String Get()
+    public IActionResult Get([FromQuery] int cid)
     {
-        return "Get Fine!";
+        try
+        {
+            ChakatonDto chakatonDto = new ChakatonDto();
+            chakatonDto.Id = cid;
+
+            ChakatonEntity ue = (ChakatonEntity) chakatonDto.ToEntity();
+            ChakatonDto result = _services.ChakatonService.Read(ue);
+
+            return Ok(ResponseManager.SendJson(result));
+        }
+        catch (Exception e)
+        {
+            return BadRequest(ResponseManager.SendError(e.Message));
+        }
+    }
+    
+    [HttpGet]
+    [Route("All")]
+    public IActionResult GetAll()
+    {
+        try
+        {
+            ChakatonDto chakatonDto = new ChakatonDto();
+            ChakatonEntity ue = (ChakatonEntity) chakatonDto.ToEntity();
+            List<ChakatonDto> result = _services.ChakatonService.ReadAll(ue);
+
+            return Ok(ResponseManager.SendJson(result));
+        }
+        catch (Exception e)
+        {
+            return BadRequest(ResponseManager.SendError(e.Message));
+        }
     }
     
     [HttpPatch]
