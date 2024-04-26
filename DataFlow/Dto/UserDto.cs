@@ -1,10 +1,12 @@
-﻿using DataFlow.Entities;
+﻿using System.Text.Json.Serialization;
+using DataFlow.Entities;
 using DataFlow.Models;
 
 namespace DataFlow.Dto;
 
 public class UserDto : IDto
 {
+    [JsonIgnore]
     public int? Id { get; set; }
     public string? Name { get; set; }
     public string? Email { get; set; }
@@ -14,6 +16,7 @@ public class UserDto : IDto
     public string? City { get; set; }
     public string? HardSkills { get; set; }
     public string? Links { get; set; }
+    [JsonIgnore]
     public List<Team>? Teams { get; set; }
 
     public IEntity ToEntity()
