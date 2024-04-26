@@ -32,9 +32,21 @@ public class UsersService
         return newlst;
     }
     
-    // public UserDto Create(UserEntity user)
-    // {
-    //     User um = (User) user.ToModel();
-    //     return (UserDto) _repositories.UserRepository.Add(um).ToDto();
-    // }
+    public UserDto Create(UserEntity user)
+    {
+        User um = (User) user.ToModel();
+        return (UserDto) _repositories.UserRepository.Add(um).ToDto();
+    }
+    
+    public UserDto Update(UserEntity user)
+    {
+        User um = (User) user.ToModel();
+        return (UserDto) _repositories.UserRepository.Update(um).ToDto();
+    }
+    
+    public UserDto Remove(UserEntity user)
+    {
+        User um = (User) user.ToModel();
+        return (UserDto) _repositories.UserRepository.Remove(um).ToDto();
+    }
 }
