@@ -1,4 +1,5 @@
-﻿using DatabaseContext;
+﻿using System.Data;
+using DatabaseContext;
 using DataFlow.Entities;
 using DataFlow.Models;
 using Microsoft.EntityFrameworkCore;
@@ -17,11 +18,11 @@ public class UsersRepository
     private User GetRecord(User user)
     {
         if (user.Id == null)
-            throw new Exception("Unexpected Nullable");
+            throw new NoNullAllowedException($"user model has a null field");
         
         List<User> users = _ctx.Users.Where(u => u.Id == user.Id).Include(u => u.Teams).ToList();
         if (users.Count == 0)
-            throw new Exception($"Record 'User' with PK_id:{user.Id} not found");
+            throw new KeyNotFoundException($"Record 'User' with PK_id:{user.Id} not found");
         
         return users.First();
     }
@@ -34,11 +35,11 @@ public class UsersRepository
     public UserEntity GetEmail(User user)
     {
         if (user.Email == null)
-            throw new Exception("Unexpected Nullable");
+            throw new NoNullAllowedException($"user model has a null field");
         
         List<User> users = _ctx.Users.Where(u => u.Email == user.Email).Include(u => u.Teams).ToList();
         if (users.Count == 0)
-            throw new Exception($"Record 'User' with PK_id:{user.Id} not found");
+            throw new KeyNotFoundException($"Record 'User' with PK_id:{user.Id} not found");
         
         return (UserEntity) users.First().ToEntity();
     }
@@ -57,16 +58,15 @@ public class UsersRepository
     
     public UserEntity Add(User user)
     {
-        if (user.Id == null ||
-        user.Name == null ||
-        user.Email == null ||
-        user.Password == null ||
-        user.Organization == null ||
-        user.Post == null ||
-        user.City == null ||
-        user.HardSkills == null ||
-        user.Links == null)
-            throw new Exception("Unexpected Nullable");
+        if (user.Name == null ||
+            user.Email == null ||
+            user.Password == null ||
+            user.Organization == null ||
+            user.Post == null ||
+            user.City == null ||
+            user.HardSkills == null ||
+            user.Links == null)
+            throw new NoNullAllowedException($"user model has a null field");
         
         _ctx.Users.Add(user);
         _ctx.SaveChanges();
@@ -77,7 +77,7 @@ public class UsersRepository
     public UserEntity Update(User user)
     {
         if (user.Id == null)
-            throw new Exception("Unexpected Nullable");
+            throw new NoNullAllowedException($"user model has a null field");
 
         User userDb = GetRecord(user);
 

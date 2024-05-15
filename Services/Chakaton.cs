@@ -31,4 +31,22 @@ public class ChakatonService
         }
         return newlst;
     }
+    
+    public ChakatonDto Create(ChakatonEntity сEntity)
+    {
+        Chakaton um = (Chakaton) сEntity.ToModel();
+        return (ChakatonDto) _repositories.ChakatonRepository.Add(um).ToDto();
+    }
+    
+    public ChakatonDto Update(ChakatonEntity сEntity)
+    {
+        Chakaton um = (Chakaton) сEntity.ToModel();
+        return (ChakatonDto) _repositories.ChakatonRepository.Update(um).ToDto();
+    }
+    
+    public ChakatonDto Remove(ChakatonEntity сEntity)
+    {
+        Chakaton um = (Chakaton) сEntity.ToModel();
+        return (ChakatonDto) _repositories.ChakatonRepository.Remove(um).ToDto();
+    }
 }

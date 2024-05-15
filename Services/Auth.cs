@@ -1,4 +1,6 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+﻿using System.Data;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Authentication;
 using System.Security.Claims;
 using System.Text;
 using DataFlow.Dto;
@@ -20,13 +22,13 @@ public class AuthService
     public string Login(UserEntity user)
     {
         if (user.Password == null)
-            throw new Exception("password is not presented");
+            throw new NoNullAllowedException("password is not presented");
         
         User um = (User) user.ToModel();
         UserDto userDto = (UserDto) _repositories.UserRepository.GetEmail(um).ToDto();
         if (CreateMd5(user.Password) != userDto.Password)
         {
-            throw new Exception("password is incorrect");
+            throw new AuthenticationException("password is incorrect");
         }
 
         if (userDto.Id == null)
@@ -56,9 +58,7 @@ public class AuthService
         {
             new Claim(ClaimsIdentity.DefaultNameClaimType, Convert.ToString(uid)),
         };
-        ClaimsIdentity claimsIdentity =
-            new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
-                ClaimsIdentity.DefaultRoleClaimType);
+        ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
         return claimsIdentity;
     }
     
