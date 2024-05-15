@@ -1,4 +1,5 @@
-﻿using DatabaseContext;
+﻿using System.Data;
+using DatabaseContext;
 using DataFlow.Entities;
 using DataFlow.Models;
 using Microsoft.EntityFrameworkCore;
@@ -17,11 +18,11 @@ public class ChakatonRepository
     private Chakaton GetRecord(Chakaton chakaton)
     {
         if (chakaton.Id == null)
-            throw new Exception("Unexpected Nullable");
+            throw new NoNullAllowedException("Unexpected Nullable");
         
         List<Chakaton> chakatons = _ctx.Chakatons.Where(u => u.Id == chakaton.Id).Include(u => u.Teams).ToList();
         if (chakatons.Count == 0)
-            throw new Exception($"Record 'User' with PK_id:{chakaton.Id} not found");
+            throw new KeyNotFoundException($"Record 'User' with PK_id:{chakaton.Id} not found");
         
         return chakatons.First();
     }
@@ -41,5 +42,50 @@ public class ChakatonRepository
             chakatonEntities.Add(ue);
         }
         return chakatonEntities;
+    }
+    
+    public ChakatonEntity Add(Chakaton chakaton)
+    {
+        if (chakaton.Name == null ||
+            chakaton.Dates == null ||
+            chakaton.Type == null ||
+            chakaton.Direction == null ||
+            chakaton.Info == null ||
+            chakaton.Links == null)
+            throw new NoNullAllowedException($"chakaton model has a null field");
+        
+        _ctx.Chakatons.Add(chakaton);
+        _ctx.SaveChanges();
+        
+        return (ChakatonEntity) chakaton.ToEntity();
+    }
+    
+    public ChakatonEntity Update(Chakaton chakaton)
+    {
+        if (chakaton.Id == null)
+            throw new NoNullAllowedException($"chakaton model has a null field");
+
+        Chakaton chakatonDb = GetRecord(chakaton);
+
+        if (chakaton.Name != null) chakatonDb.Name = chakaton.Name;
+        if (chakaton.Dates != null) chakatonDb.Dates = chakaton.Dates;
+        if (chakaton.Type != null) chakatonDb.Type = chakaton.Type;
+        if (chakaton.Direction != null) chakatonDb.Direction = chakaton.Direction;
+        if (chakaton.Info != null) chakatonDb.Info = chakaton.Info;
+        if (chakaton.Links != null) chakatonDb.Links = chakaton.Links;
+        
+        _ctx.SaveChanges();
+        
+        return (ChakatonEntity) chakatonDb.ToEntity();
+    }
+    
+    public ChakatonEntity Remove(Chakaton chakaton)
+    {
+        Chakaton chakatonDb = GetRecord(chakaton);
+
+        _ctx.Chakatons.Remove(chakatonDb);
+        _ctx.SaveChanges();
+        
+        return (ChakatonEntity) chakatonDb.ToEntity();
     }
 }
